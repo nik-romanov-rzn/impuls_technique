@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Товар - Импульс</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f7;
+            color: #1d1d1f;
+            padding-top: 110px;
+            line-height: 1.5;
+        }
+
+        .product-detail-page { min-height: calc(100vh - 200px); }
+        .product-container { max-width: 1200px; margin: 0 auto; padding: 1rem; }
+
+        .product-breadcrumb {
+            display: flex; align-items: center; gap: 0.5rem;
+            font-size: 0.8125rem; color: #86868b; margin-bottom: 1rem; flex-wrap: wrap;
+        }
+        .product-breadcrumb a { color: #667eea; text-decoration: none; }
+        .product-breadcrumb a:hover { text-decoration: underline; }
+        .product-breadcrumb i { font-size: 0.625rem; }
+
+        .product-main {
+            background: white; border-radius: 1rem; padding: 1.5rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; margin-bottom: 1.5rem;
+        }
+
+        .product-gallery { display: flex; gap: 0.75rem; }
+        .product-thumbnails { display: flex; flex-direction: column; gap: 0.5rem; }
+        .product-thumbnails img {
+            width: 56px; height: 56px; object-fit: cover; border-radius: 0.5rem;
+            border: 2px solid #e1e1e6; cursor: pointer; transition: all 0.2s;
+        }
+        .product-thumbnails img.active, .product-thumbnails img:hover {
+            border-color: #667eea; transform: scale(1.05);
+        }
+        .product-main-image {
+            flex: 1; background: #fafafa; border-radius: 0.75rem; padding: 1.5rem;
+            display: flex; align-items: center; justify-content: center;
+            position: relative; min-height: 320px;
+        }
+        .product-main-image img { max-width: 100%; max-height: 360px; object-fit: contain; }
+        .product-badges {
+            position: absolute; bottom: 0.75rem; left: 0.75rem;
+            display: flex; flex-direction: column; gap: 0.375rem;
+        }
+        .product-badge {
+            padding: 0.375rem 0.625rem; border-radius: 0.375rem;
+            font-size: 0.6875rem; font-weight: 600; color: white;
+        }
+        .badge-tradein { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+        .badge-credit { background: linear-gradient(135deg, #fa709a, #fee140); }
+        .badge-new { background: linear-gradient(135deg, #43e97b, #30cfd0); }
+
+        .product-info { display: flex; flex-direction: column; gap: 1.25rem; }
+        .product-header { border-bottom: 1px solid #f0f0f0; padding-bottom: 1rem; }
+        .product-title {
+            font-size: 1.5rem; font-weight: 700; color: #1d1d1f;
+            line-height: 1.3; margin-bottom: 0.5rem;
+        }
+        .product-meta {
+            display: flex; flex-wrap: wrap; gap: 1rem;
+            font-size: 0.8125rem; color: #86868b;
+        }
+        .product-meta span { display: flex; align-items: center; gap: 0.375rem; }
+        .product-meta i { color: #667eea; }
+        .product-meta .fa-star { color: #ffc107; }
+
+        .product-options { display: flex; flex-direction: column; gap: 1rem; }
+        .option-group { display: flex; flex-direction: column; gap: 0.5rem; }
+        .option-label { font-size: 0.8125rem; color: #86868b; font-weight: 500; }
+        .option-buttons { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .option-btn {
+            padding: 0.625rem 1rem; border: 2px solid #e1e1e6; border-radius: 0.5rem;
+            background: white; cursor: pointer; font-size: 0.8125rem; font-weight: 500;
+            color: #1d1d1f; transition: all 0.2s;
+        }
+        .option-btn:hover { border-color: #667eea; transform: translateY(-1px); }
+        .option-btn.active {
+            border-color: #667eea; background: linear-gradient(135deg, #667eea, #764ba2); color: white;
+        }
+
+        .product-purchase {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 0.75rem; padding: 1.25rem;
+            display: flex; flex-direction: column; gap: 1rem;
+        }
+        .social-share { display: flex; gap: 0.5rem; justify-content: flex-end; }
+        .social-share a {
+            width: 32px; height: 32px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: white; text-decoration: none; transition: transform 0.2s; font-size: 0.875rem;
+        }
+        .social-share a:hover { transform: scale(1.1); }
+        .share-telegram { background: #229ED9; }
+        .share-whatsapp { background: #25D366; }
+        .share-copy { background: #667eea; }
+
+        .product-price-block { display: flex; flex-direction: column; gap: 0.25rem; }
+        .price-label { font-size: 0.75rem; color: #28a745; font-weight: 600; text-transform: uppercase; }
+        .price-wrapper { display: flex; align-items: baseline; gap: 0.75rem; }
+        .price-current { font-size: 1.75rem; font-weight: 700; color: #28a745; }
+        .price-old { font-size: 0.875rem; color: #86868b; text-decoration: line-through; }
+
+        .stock-status {
+            display: flex; align-items: center; gap: 0.5rem; padding: 0.625rem;
+            background: #e8f5e9; border-radius: 0.375rem;
+            font-size: 0.8125rem; color: #2e7d32;
+        }
+        .stock-status i { color: #28a745; }
+
+        .btn-add-cart {
+            width: 100%; background: linear-gradient(135deg, #5361fd, #4056fd);
+            color: white; border: none; padding: 0.875rem; border-radius: 0.5rem;
+            font-size: 0.9375rem; font-weight: 600; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+            transition: all 0.2s;
+        }
+        .btn-add-cart:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(83,97,253,0.4); }
+        .btn-add-cart:active { transform: translateY(0); }
+
+        .btn-quick-buy {
+            width: 100%; background: white; color: #1d1d1f;
+            border: 2px solid #e1e1e6; padding: 0.875rem; border-radius: 0.5rem;
+            font-size: 0.9375rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
+        }
+        .btn-quick-buy:hover { background: #f5f5f7; border-color: #667eea; }
+
+        .credit-info { font-size: 0.6875rem; color: #86868b; text-align: center; line-height: 1.4; }
+
+        .product-sections { display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; }
+        .product-section {
+            background: white; border-radius: 1rem; padding: 1.5rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        .product-section h2 {
+            font-size: 1.25rem; margin-bottom: 1rem; color: #1d1d1f;
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+        .product-section h2 i { color: #667eea; font-size: 1rem; }
+        .product-description { line-height: 1.7; color: #1d1d1f; font-size: 0.9375rem; }
+        .product-description p { margin-bottom: 1rem; }
+        .product-description ul { margin-left: 1.25rem; margin-bottom: 1rem; }
+        .product-description li { margin-bottom: 0.375rem; }
+
+        .specs-table { width: 100%; border-collapse: collapse; }
+        .specs-table tr { border-bottom: 1px solid #f0f0f0; }
+        .specs-table tr:last-child { border-bottom: none; }
+        .specs-table td { padding: 0.75rem 0; font-size: 0.875rem; }
+        .specs-table td:first-child { color: #86868b; width: 55%; }
+        .specs-table td:last-child { color: #1d1d1f; font-weight: 500; text-align: right; }
+
+        .loading-state, .error-state { text-align: center; padding: 4rem 1rem; color: #86868b; }
+        .loading-state i { font-size: 2.5rem; margin-bottom: 1rem; opacity: 0.3; color: #667eea; }
+        .error-state i { font-size: 2.5rem; margin-bottom: 1rem; opacity: 0.3; color: #dc3545; }
+        .error-state p { color: #dc3545; margin-bottom: 1rem; }
+
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5); z-index: 10000;
+            display: flex; align-items: center; justify-content: center; padding: 1rem;
+        }
+        .modal-content {
+            background: white; padding: 1.5rem; border-radius: 1rem;
+            max-width: 400px; width: 100%; max-height: 90vh; overflow-y: auto;
+        }
+        .modal-title { font-size: 1.25rem; margin-bottom: 0.75rem; }
+        .modal-form input, .modal-form textarea {
+            width: 100%; padding: 0.75rem; border: 2px solid #e1e1e6;
+            border-radius: 0.5rem; font-size: 1rem; margin-bottom: 0.75rem;
+        }
+        .modal-form textarea { resize: vertical; min-height: 80px; }
+        .agreement-label {
+            display: flex; align-items: flex-start; gap: 0.5rem;
+            font-size: 0.8125rem; color: #1d1d1f; margin-bottom: 1rem; cursor: pointer;
+        }
+        .agreement-label input { margin-top: 0.125rem; flex-shrink: 0; }
+        .agreement-label a { color: #667eea; text-decoration: none; }
+        .agreement-label a:hover { text-decoration: underline; }
+        .modal-buttons { display: flex; gap: 0.75rem; }
+        .modal-btn {
+            flex: 1; padding: 0.875rem; border: none; border-radius: 0.5rem;
+            font-weight: 600; cursor: pointer; font-size: 1rem; transition: all 0.2s;
+        }
+        .modal-btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2); color: white;
+        }
+        .modal-btn-primary:hover { transform: translateY(-2px); }
+        .modal-btn-secondary { background: #f5f5f7; color: #1d1d1f; }
+        .modal-btn-secondary:hover { background: #e1e1e6; }
+
+        /* Адаптив */
+        @media (max-width: 75rem) {
+            .product-main { grid-template-columns: 1fr; gap: 1.5rem; }
+            .product-gallery { flex-direction: column; }
+            .product-thumbnails { flex-direction: row; order: 2; justify-content: center; }
+            .product-sections { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 48rem) {
+            body { padding-top: 100px; }
+            .product-container { padding: 0.75rem; }
+            .product-main { padding: 1rem; border-radius: 0.75rem; }
+            .product-title { font-size: 1.25rem; }
+            .product-main-image { min-height: 240px; padding: 1rem; }
+            .product-main-image img { max-height: 280px; }
+            .product-thumbnails img { width: 48px; height: 48px; }
+            .option-buttons { flex-direction: column; }
+            .option-btn { width: 100%; text-align: center; }
+            .price-current { font-size: 1.5rem; }
+            .product-section { padding: 1rem; }
+            .product-section h2 { font-size: 1.125rem; }
+            .specs-table td { padding: 0.5rem 0; font-size: 0.8125rem; }
+            .social-share { justify-content: center; }
+        }
+        @media (max-width: 30rem) {
+            .product-breadcrumb { font-size: 0.75rem; }
+            .product-title { font-size: 1.125rem; }
+            .product-meta { flex-direction: column; gap: 0.5rem; }
+            .price-wrapper { flex-direction: column; gap: 0.25rem; }
+            .product-badges { bottom: 0.5rem; left: 0.5rem; }
+            .product-badge { font-size: 0.625rem; padding: 0.25rem 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-top">
+            <a href="index.html" class="logo">Импульс</a>
+            <button class="catalog-btn" id="catalogBtn">
+                <i class="fas fa-bars"></i> Каталог
+            </button>
+            <div class="search-bar">
+                <input type="text" placeholder="Искать товары">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+            <a href="cabinet.html" class="header-action" id="userLink" style="display:none;">
+                <i class="fas fa-user"></i><span id="userName">Кабинет</span>
+            </a>
+            <a href="login.html" class="header-action" id="loginLink">
+                <i class="fas fa-user"></i><span>Войти</span>
+            </a>
+            <a href="#" class="header-action" id="favoritesLink" style="display:none;">
+                <i class="fas fa-heart"></i><span>Избранное</span>
+                <span class="badge" id="favBadge" style="display:none;">0</span>
+            </a>
+            <a href="#" class="header-action" id="cartLink">
+                <i class="fas fa-shopping-cart"></i><span>Корзина</span>
+                <span class="badge" id="cartBadge">0</span>
+            </a>
+        </div>
+        <nav class="nav">
+            <ul class="nav-list">
+                <li><a href="#">iPhone</a></li><li><a href="#">iPad</a></li>
+                <li><a href="#">Mac</a></li><li><a href="#">Watch</a></li>
+                <li><a href="#">AirPods</a></li><li><a href="#">Samsung</a></li>
+                <li><a href="#">PlayStation</a></li><li><a href="#">Dyson</a></li>
+                <li><a href="#">Garmin</a></li><li><a href="#">Trade-in</a></li>
+                <li><a href="#">Рассрочка</a></li><li><a href="#">Блог</a></li>
+                <li><a href="#">Акции</a></li><li><a href="#">Отзывы</a></li>
+                <li><a href="#">Контакты</a></li>
+            </ul>
+        </nav>
+        <div class="catalog-dropdown" id="catalogDropdown">
+            <div class="catalog-dropdown-content">
+                <div class="catalog-title">Каталог</div>
+                <ul class="catalog-list">
+                    <li><a href="#" class="catalog-link">Apple</a></li>
+                    <li><a href="#" class="catalog-link">Samsung</a></li>
+                    <li><a href="#" class="catalog-link">OnePlus</a></li>
+                    <li><a href="#" class="catalog-link">Dyson</a></li>
+                    <li><a href="#" class="catalog-link">DJI</a></li>
+                    <li><a href="#" class="catalog-link">Игровые консоли</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div class="product-detail-page">
+        <div class="product-container">
+            <div class="product-breadcrumb" id="breadcrumb" style="display:none;">
+                <a href="index.html">Главная</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="#" id="breadcrumbCategory">Категория</a>
+                <i class="fas fa-chevron-right"></i>
+                <span id="breadcrumbName">Товар</span>
+            </div>
+
+            <div id="loadingState" class="loading-state">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Загрузка товара...</p>
+            </div>
+
+            <div id="errorState" class="error-state" style="display:none;">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p id="errorMsg">Товар не найден</p>
+                <a href="index.html" class="btn-add-cart" style="display:inline-flex;width:auto;padding:0.75rem 1.5rem;">
+                    <i class="fas fa-home"></i> На главную
+                </a>
+            </div>
+
+            <div id="productContent" style="display:none;">
+                <div class="product-main">
+                    <div class="product-gallery">
+                        <div class="product-thumbnails" id="thumbnails">
+                            <img id="thumb1" src="" alt="" class="active" onclick="changeImage(this)">
+                        </div>
+                        <div class="product-main-image">
+                            <img id="mainImage" src="" alt="">
+                            <div class="product-badges" id="productBadges"></div>
+                        </div>
+                    </div>
+
+                    <div class="product-info">
+                        <div class="product-header">
+                            <h1 class="product-title" id="productTitle">Название</h1>
+                            <div class="product-meta">
+                                <span><i class="fas fa-star"></i><span id="productRating">0</span>(<span id="productReviews">0</span>)</span>
+                                <span><i class="fas fa-heart"></i><a href="#" onclick="addToFavorite();return false;">В избранное</a></span>
+                            </div>
+                        </div>
+
+                        <div class="product-options" id="productOptions" style="display:none;">
+                            <div class="option-group">
+                                <span class="option-label">Память:</span>
+                                <div class="option-buttons">
+                                    <button class="option-btn active" onclick="selectOption(this)">128GB</button>
+                                    <button class="option-btn" onclick="selectOption(this)">256GB</button>
+                                </div>
+                            </div>
+                            <div class="option-group">
+                                <span class="option-label">Цвет:</span>
+                                <div class="option-buttons">
+                                    <button class="option-btn active" onclick="selectOption(this)">Silver</button>
+                                    <button class="option-btn" onclick="selectOption(this)">Black</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product-purchase">
+                            <div class="social-share">
+                                <a href="#" class="share-telegram" onclick="share('telegram');return false;"><i class="fab fa-telegram"></i></a>
+                                <a href="#" class="share-whatsapp" onclick="share('whatsapp');return false;"><i class="fab fa-whatsapp"></i></a>
+                                <a href="#" class="share-copy" onclick="share('copy');return false;"><i class="fas fa-share"></i></a>
+                            </div>
+                            <div class="product-price-block">
+                                <span class="price-label">Цена по акции</span>
+                                <div class="price-wrapper">
+                                    <span class="price-current" id="priceCurrent">0 ₽</span>
+                                    <span class="price-old" id="priceOld" style="display:none;"></span>
+                                </div>
+                            </div>
+                            <div class="stock-status"><i class="fas fa-check-circle"></i><span>В наличии</span></div>
+                            <button class="btn-add-cart" onclick="addToCart()"><i class="fas fa-shopping-cart"></i>В корзину</button>
+                            <div class="credit-info">Рассрочка от <strong id="creditAmount">0 ₽/мес</strong></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-sections">
+                    <div class="product-section">
+                        <h2><i class="fas fa-align-left"></i>Описание</h2>
+                        <div class="product-description" id="productDescription"></div>
+                    </div>
+                    <div class="product-section">
+                        <h2><i class="fas fa-list-ul"></i>Характеристики</h2>
+                        <table class="specs-table">
+                            <tr><td>Артикул</td><td id="specId">-</td></tr>
+                            <tr><td>Категория</td><td id="specCategory">-</td></tr>
+                            <tr><td>Рейтинг</td><td id="specRating">-</td></tr>
+                            <tr><td>Гарантия</td><td>1 год</td></tr>
+                            <tr><td>Возврат</td><td>14 дней</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-brand">
+                        <div class="footer-logo">Импульс</div>
+                        <p class="footer-desc">Территория техники Apple, к которому хочется возвращаться</p>
+                        <div class="footer-social">
+                            <a href="#" class="social-link"><i class="fab fa-vk"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                    <div class="footer-column">
+                        <h4 class="footer-title">О компании</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">Адреса магазинов</a></li>
+                            <li><a href="#">Акции и новости</a></li>
+                            <li><a href="#">Блог</a></li>
+                            <li><a href="#">Обратная связь</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4 class="footer-title">Помощь</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">Помощь</a></li>
+                            <li><a href="#">Гарантия</a></li>
+                            <li><a href="#">Доставка и оплата</a></li>
+                            <li><a href="#">Обмен и возврат</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4 class="footer-title">Каталог</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">Mac</a></li>
+                            <li><a href="#">iPhone</a></li>
+                            <li><a href="#">Watch</a></li>
+                            <li><a href="#">iPad</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4 class="footer-title">Контакты</h4>
+                        <div class="footer-contact">
+                            <p class="contact-address"><i class="fas fa-map-marker-alt"></i>Россия, Город Дзержинского, 1/2</p>
+                            <p class="contact-phone"><i class="fas fa-phone"></i><a href="tel:8800999999">8 800 999 99 99</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container"><p class="copyright">© 2026 Импульс</p></div>
+        </div>
+    </footer>
+<script>
+    let currentProduct = null;
+    document.addEventListener('DOMContentLoaded', async function() {
+        const id = new URLSearchParams(window.location.search).get('id');
+        if (!id) { showError('Не указан ID товара'); return; }
+
+        try {
+            const res = await fetch('/api/products.php?id=' + id);
+            const text = await res.text();
+            
+            if (text.trim().startsWith('<')) throw new Error('Сервер вернул HTML');
+            if (!text.trim()) throw new Error('Пустой ответ от сервера');
+            
+            const product = JSON.parse(text);
+            if (product.error) throw new Error(product.error);
+            if (!product.id) throw new Error('Некорректный ответ');
+            
+            currentProduct = product;
+            renderProduct(product);
+        } catch (e) {
+            console.error('Ошибка загрузки товара:', e);
+            showError(e.message || 'Не удалось загрузить товар');
+        }
+    });
+
+    function renderProduct(p) {
+        document.getElementById('loadingState').style.display = 'none';
+        document.getElementById('productContent').style.display = 'block';
+        document.getElementById('breadcrumb').style.display = 'flex';
+        
+        document.title = p.name + ' - Импульс';
+        document.getElementById('productTitle').textContent = p.name;
+        document.getElementById('breadcrumbName').textContent = p.name;
+        document.getElementById('breadcrumbCategory').textContent = getCategoryName(p.category);
+        
+        document.getElementById('mainImage').src = p.image;
+        document.getElementById('thumb1').src = p.image;
+        
+        document.getElementById('priceCurrent').textContent = formatPrice(p.price);
+        if (p.old_price) {
+            document.getElementById('priceOld').textContent = formatPrice(p.old_price);
+            document.getElementById('priceOld').style.display = 'inline';
+        }
+        document.getElementById('productRating').textContent = p.rating;
+        document.getElementById('productReviews').textContent = p.reviews;
+        
+        document.getElementById('productDescription').innerHTML = p.description 
+            ? p.description.replace(/\n/g, '<br>') 
+            : '<p>Описание скоро появится...</p>';
+        
+        document.getElementById('specId').textContent = p.id;
+        document.getElementById('specCategory').textContent = getCategoryName(p.category);
+        document.getElementById('specRating').textContent = p.rating;
+        document.getElementById('creditAmount').textContent = formatPrice(Math.round(p.price / 12)) + '/мес';
+        
+        if (p.options) document.getElementById('productOptions').style.display = 'block';
+    }
+
+    function getCategoryName(c) {
+        const n = { bestsellers:'Хиты', new:'Новинки', sale:'Акции', iphone:'iPhone', ipad:'iPad', mac:'Mac', watch:'Watch' };
+        return n[c] || c || 'Каталог';
+    }
+    function formatPrice(p) { return p.toLocaleString('ru-RU') + ' ₽'; }
+    function showError(msg) {
+        document.getElementById('loadingState').style.display = 'none';
+        document.getElementById('errorState').style.display = 'block';
+        document.getElementById('errorMsg').textContent = msg;
+    }
+    function changeImage(thumb) {
+        document.querySelectorAll('.product-thumbnails img').forEach(i => i.classList.remove('active'));
+        thumb.classList.add('active');
+        document.getElementById('mainImage').src = thumb.src;
+    }
+    function selectOption(btn) {
+        btn.parentElement.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+    }
+
+    async function addToCart() {
+        if (!currentProduct) return;
+        const fd = new FormData();
+        fd.append('product_id', currentProduct.id);
+        fd.append('quantity', 1);
+        try {
+            const r = await fetch('/api/cart.php?action=add', { method:'POST', body:fd });
+            const text = await r.text();
+            if (text.trim().startsWith('<')) throw new Error('HTML ответ');
+            const res = JSON.parse(text);
+            alert(res.success ? 'В корзине!' : ' ' + (res.error||'Ошибка'));
+        } catch(e) { alert('Ошибка: ' + e.message); }
+    }
+    
+    async function addToFavorite() {
+        if (!currentProduct) return;
+        try {
+            const fd = new FormData();
+            fd.append('product_id', currentProduct.id);
+            const r = await fetch('/api/favorites.php?action=add', { method:'POST', body:fd });
+            const text = await r.text();
+            if (text.trim().startsWith('<')) throw new Error('HTML ответ');
+            alert('В избранном!');
+        } catch(e) { alert('Ошибка: ' + e.message); }
+    }
+
+    function quickBuy() {
+        if (!currentProduct) return;
+        
+        document.querySelectorAll('.modal-overlay').forEach(m => m.remove());
+        
+        const modal = document.createElement('div');
+        modal.className = 'modal-overlay';
+        modal.innerHTML = `
+            <div class="modal-content">
+                <h3 class="modal-title">Быстрый заказ</h3>
+                <p style="margin-bottom:1rem;color:#86868b;font-size:0.875rem;">${escapeHtml(currentProduct.name)}</p>
+                <p style="margin-bottom:1rem;font-weight:600;font-size:1.125rem;color:#28a745;">${formatPrice(currentProduct.price)}</p>
+                <form class="modal-form" id="quickBuyForm">
+                    <input type="hidden" name="product_id" value="${currentProduct.id}">
+                    <input type="hidden" name="product_name" value="${escapeHtml(currentProduct.name)}">
+                    <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required>
+                    <input type="text" name="name" placeholder="Ваше имя">
+                    <textarea name="comment" placeholder="Комментарий" rows="2"></textarea>
+                    <label class="agreement-label">
+                        <input type="checkbox" name="agreement" required>
+                        <span>Я согласен на <a href="#">обработку персональных данных</a></span>
+                    </label>
+                    <div class="modal-buttons">
+                        <button type="button" class="modal-btn modal-btn-secondary" id="quickBuyCancel">Отмена</button>
+                        <button type="submit" class="modal-btn modal-btn-primary" id="quickBuySubmit">
+                            <i class="fas fa-phone"></i> Заказать
+                        </button>
+                    </div>
+                </form>
+                <div id="quickBuyMessage" style="margin-top:1rem;text-align:center;font-size:0.875rem;"></div>
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+        
+        document.getElementById('quickBuyCancel').onclick = closeQuickBuyModal;
+        modal.onclick = function(e) { if (e.target === modal) closeQuickBuyModal(); };
+        
+        document.getElementById('quickBuyForm').onsubmit = async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('quickBuySubmit');
+            const messageDiv = document.getElementById('quickBuyMessage');
+            const originalText = submitBtn.innerHTML;
+            const agreement = this.querySelector('[name="agreement"]');
+            
+            if (!agreement.checked) {
+                messageDiv.innerHTML = '<span style="color:#dc3545;">Требуется согласие</span>';
+                return;
+            }
+            
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Отправка...';
+            messageDiv.textContent = '';
+            
+            const formData = new FormData(this);
+            formData.append('type', 'quick_order');
+            
+            try {
+                console.log('📤 QuickBuy request');
+                
+                const response = await fetch('/api/callback.php?action=create', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                console.log('📡 Status:', response.status);
+                
+                const text = await response.text();
+                console.log('📄 Response:', text.substring(0, 500));
+                
+                if (!text || text.trim() === '') {
+                    throw new Error('Пустой ответ от сервера');
+                }
+                
+                if (text.trim().startsWith('<') || text.trim().startsWith('<?')) {
+                    throw new Error('Сервер вернул HTML вместо JSON');
+                }
+                
+                const result = JSON.parse(text);
+                
+                if (result.success) {
+                    messageDiv.innerHTML = '<span style="color:#28a745;">' + result.message + '</span>';
+                    setTimeout(closeQuickBuyModal, 2000);
+                } else {
+                    messageDiv.innerHTML = '<span style="color:#dc3545;">' + (result.error || 'Ошибка') + '</span>';
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
+                }
+                
+            } catch (error) {
+                console.error('QuickBuy error:', error);
+                messageDiv.innerHTML = '<span style="color:#dc3545;">' + error.message + '</span>';
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
+        };
+        
+        const onEsc = function(e) {
+            if (e.key === 'Escape') {
+                closeQuickBuyModal();
+                document.removeEventListener('keydown', onEsc);
+            }
+        };
+        document.addEventListener('keydown', onEsc);
+    }
+    
+    function closeQuickBuyModal() {
+        const modal = document.querySelector('.modal-overlay');
+        if (modal) modal.remove();
+    }
+    
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    function share(type) {
+        if (!currentProduct) return;
+        const url = encodeURIComponent(location.href);
+        const text = encodeURIComponent(currentProduct.name);
+        
+        if (type === 'telegram') {
+            window.open(`https://t.me/share/url?url=${url}&text=${text}`, '_blank');
+        } else if (type === 'whatsapp') {
+            window.open(`https://wa.me/?text=${text}%20${url}`, '_blank');
+        } else if (type === 'copy') {
+            navigator.clipboard.writeText(location.href).then(() => {
+                alert('Ссылка скопирована!');
+            }).catch(() => {
+                alert('Не удалось скопировать');
+            });
+        }
+    }
+
+    const catalogBtn = document.getElementById('catalogBtn');
+    const catalogDropdown = document.getElementById('catalogDropdown');
+    if (catalogBtn && catalogDropdown) {
+        catalogBtn.addEventListener('click', e => { e.stopPropagation(); catalogDropdown.classList.toggle('active'); });
+        document.addEventListener('click', e => {
+            if (!catalogDropdown.contains(e.target) && !catalogBtn.contains(e.target))
+                catalogDropdown.classList.remove('active');
+        });
+    }
+</script>
+</body>
+</html>

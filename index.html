@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Импульс</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-top">
+            <a href="index.html" class="logo">Импульс</a>
+            <button class="catalog-btn" id="catalogBtn">
+                <i class="fas fa-bars"></i>
+                Каталог
+            </button>
+<div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Искать товары...">
+    <button class="search-btn" id="searchBtn"><i class="fas fa-search"></i></button>
+</div>
+    <a href="cabinet.html" class="header-action" id="userLink" style="display: none;">
+        <i class="fas fa-user"></i>
+        <span id="userName">Кабинет</span>
+    </a>
+    <a href="login.html" class="header-action" id="loginLink">
+        <i class="fas fa-user"></i>
+        <span>Войти</span>
+    </a>
+    <a href="cabinet.html" class="header-action" id="favoritesLink" style="display: none;">
+        <i class="fas fa-heart"></i>
+        <span>Избранное</span>
+        <span class="badge" id="favBadge" style="display: none;">0</span>
+    </a>
+    <a href="cabinet.html" class="header-action" id="cartLink">
+        <i class="fas fa-shopping-cart"></i>
+        <span>Корзина</span>
+        <span class="badge" id="cartBadge">0</span>
+    </a>
+            </div>
+        </div>
+        <nav class="nav">
+            <ul class="nav-list">
+                <li><a href="catalog.html">iPhone</a></li>
+                <li><a href="catalog.html">iPad</a></li>
+                <li><a href="catalog.html">Mac</a></li>
+                <li><a href="catalog.html">Watch</a></li>
+                <li><a href="catalog.html">AirPods</a></li>
+                <li><a href="catalog.html">Samsung</a></li>
+                <li><a href="catalog.html">PlayStation</a></li>
+                <li><a href="catalog.html">Dyson</a></li>
+                <li><a href="catalog.html">Garmin</a></li>
+                <li><a href="404.html">Trade-in</a></li>
+                <li><a href="404.html">Рассрочка</a></li>
+                <li><a href="404.html">Блог</a></li>
+                <li><a href="404.html">Акции</a></li>
+                <li><a href="404.html">Отзывы</a></li>
+                <li><a href="404.html">Контакты</a></li>
+            </ul>
+        </nav>
+
+        <div class="catalog-dropdown" id="catalogDropdown">
+    <div class="catalog-dropdown-content">
+        <div class="catalog-title">Каталог</div>
+        <ul class="catalog-list">
+            <li><a href="catalog.html" class="catalog-link">Apple</a></li>
+            <li><a href="catalog.html" class="catalog-link">Samsung</a></li>
+            <li><a href="catalog.html" class="catalog-link">OnePlus</a></li>
+            <li><a href="catalog.html" class="catalog-link">Dyson</a></li>
+            <li><a href="catalog.html" class="catalog-link">DJI</a></li>
+            <li><a href="catalog.html" class="catalog-link">Игровые консоли</a></li>
+            <li><a href="catalog.html" class="catalog-link">Очки дополненной реальности</a></li>
+            <li><a href="catalog.html" class="catalog-link">ТВ, аудио и видео</a></li>
+        </ul>
+    </div>
+</div>
+    </header>
+
+<section class="features">
+    <div class="features-wrapper">
+        <div class="features-list">
+            <div class="feature-item">
+                <i class="fas fa-truck"></i>
+                <span>Быстрая доставка</span>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-shield-alt"></i>
+                <span>Гарантия низкой цены</span>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-percent"></i>
+                <span>Скидка при оплате наличными</span>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-exchange-alt"></i>
+                <span>Работаем с юрлицами</span>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-sync-alt"></i>
+                <span>Программа Trade-in</span>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-check-circle"></i>
+                <span>Гарантия 1 год</span>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-truck"></i>
+                <span>Быстрая доставка</span>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-shield-alt"></i>
+                <span>Гарантия низкой цены</span>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-percent"></i>
+                <span>Скидка при оплате наличными</span>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-exchange-alt"></i>
+                <span>Работаем с юрлицами</span>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-sync-alt"></i>
+                <span>Программа Trade-in</span>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-check-circle"></i>
+                <span>Гарантия 1 год</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+   <section class="main-banners">
+    <div class="banner">
+        <div class="banner-content">
+            <p>Нам доверяют</p>
+            <h2>Более 22 000 положительных отзывов</h2>
+            <a href="#" class="banner-btn">
+                Подробнее
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+        <div class="banner-image">
+            <img src="banner1.png" alt="Reviews">
+        </div>
+    </div>
+    <div class="banner">
+        <div class="banner-content">
+            <p>Trade-in</p>
+            <h2>Обновите устройство с выгодой</h2>
+            <a href="#" class="banner-btn">
+                Подробнее
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+        <div class="banner-image">
+            <img src="banner2.png" alt="Trade-in">
+        </div>
+    </div>
+</section>
+
+    <section class="categories">
+    <div class="categories-grid">
+        <div class="category-card">
+            <div class="category-icon">
+                <img src="iPhone.png" alt="iPhone">
+            </div>
+            <div class="category-name">iPhone</div>
+        </div>
+        <div class="category-card">
+            <div class="category-icon">
+                <img src="iPad.png" alt="iPad">
+            </div>
+            <div class="category-name">iPad</div>
+        </div>
+        <div class="category-card">
+            <div class="category-icon">
+                <img src="Watch.png" alt="Watch">
+            </div>
+            <div class="category-name">Watch</div>
+        </div>
+        <div class="category-card">
+            <div class="category-icon">
+                <img src="iMac.png" alt="iMac">
+            </div>
+            <div class="category-name">iMac</div>
+        </div>
+        <div class="category-card">
+            <div class="category-icon">
+                <img src="Аксессуары.png" alt="Аксессуары">
+            </div>
+            <div class="category-name">Аксессуары</div>
+        </div>
+        <div class="category-card">
+            <div class="category-icon">
+                <img src="macbook.png" alt="Macbook">
+            </div>
+            <div class="category-name">Macbook</div>
+        </div>
+        <div class="category-card">
+            <div class="category-icon">
+                <img src="Развлечения.png" alt="Развлечения">
+            </div>
+            <div class="category-name">Развлечения</div>
+        </div>
+        <div class="category-card">
+            <div class="category-icon">
+                <img src="Аудио и видео.png" alt="Аудио и видео">
+            </div>
+            <div class="category-name">Аудио и видео</div>
+        </div>
+    </div>
+</section>
+
+<section class="bottom-banners">
+    <div class="bottom-banner left">
+        <div class="bottom-banner-content">
+            <p>На все заказы от 10 000 ₽</p>
+            <h3>Бесплатная доставка <br>по городу</h3>
+        </div>
+        <div class="banner-image-right">
+            <img src="banner3.png" alt="Delivery">
+        </div>
+    </div>
+    <div class="bottom-banner right">
+        <div class="bottom-banner-content">
+            <p>Полный прайс и актуальные цены в Telegram</p>
+            <h3>Подписывайтесь</h3>
+            <a href="#" class="banner-btn">
+                Перейти
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+        <div class="banner-image-right">
+            <img src="banner4.png" alt="Telegram">
+        </div>
+    </div>
+</section>
+
+<section class="bestsellers">
+    <div class="container">
+        <h2 class="section-title">Хиты продаж</h2>
+        <div class="products-grid" id="productsGrid">
+            <div class="loading-spinner">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Загрузка товаров...</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="features-section">
+    <div class="container">
+        <div class="features-banner">
+            <div class="features-header">
+                <div class="features-top">
+                    <div class="features-logo">Импульс</div>
+                    <p class="features-subtitle">Территория техники Apple, <br>к которому хочется возвращаться</p>
+                </div>
+                <h2 class="features-title">Мы убрали лишнее, оставили главное: комфорт, честность и сервис!</h2>
+            </div>
+            <div class="features-cards-wrapper">
+                <div class="features-cards">
+                    <div class="feature-card">
+                        <div class="feature-card-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <h3>Хочешь новое — привози старое</h3>
+                        <p>Выкупим или обменяем по трейд-ину на выгодных условиях</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-card-icon">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <h3>Полный цикл обслуживания</h3>
+                        <p>Перенос данных, настройка, установка приложений — всё под ключ при покупке</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-card-icon">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <h3>Подарки и забота в деталях</h3>
+                        <p>Чехол, защитное стекло с установкой и персональная помощь — стандарт сервиса</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="articles-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Последние статьи</h2>
+            <a href="#" class="all-articles">Все статьи <i class="fas fa-chevron-right"></i></a>
+        </div>
+        <div class="articles-grid">
+            <article class="article-card">
+                <div class="article-image">
+                    <img src="kontrol.png" alt="Контроль подписок">
+                </div>
+                <div class="article-content">
+                    <h3>Контроль подписок в банковском приложении</h3>
+                    <span class="article-date">28 февраля</span>
+                </div>
+            </article>
+            <article class="article-card">
+                <div class="article-image">
+                    <img src="actionbutton.png" alt="Action Button">
+                </div>
+                <div class="article-content">
+                    <h3>Скрытый потенциал кнопки Action Button</h3>
+                    <span class="article-date">26 февраля</span>
+                </div>
+            </article>
+            <article class="article-card">
+                <div class="article-image">
+                    <img src="dannie.png" alt="Личные данные">
+                </div>
+                <div class="article-content">
+                    <h3>Как не слить личные данные — три полезных сайта</h3>
+                    <span class="article-date">25 февраля</span>
+                </div>
+            </article>
+            <article class="article-card">
+                <div class="article-image">
+                    <img src="gosuslugi.png" alt="Госуслуги">
+                </div>
+                <div class="article-content">
+                    <h3>Вход в Госуслуги без установки Max</h3>
+                    <span class="article-date">22 февраля</span>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="footer-top">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">Импульс
+                    </div>
+                    <p class="footer-desc">Территория техники Apple, к которому хочется возвращаться</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-vk"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4 class="footer-title">О компании</h4>
+                    <ul class="footer-links">
+                        <li><a href="404.html">Адреса магазинов</a></li>
+                        <li><a href="404.html">Акции и новости</a></li>
+                        <li><a href="404.html">Блог</a></li>
+                        <li><a href="404.html">Обратная связь</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4 class="footer-title">Помощь</h4>
+                    <ul class="footer-links">
+                        <li><a href="404.html">Помощь</a></li>
+                        <li><a href="404.html">Гарантия</a></li>
+                        <li><a href="404.html">Горячий номер</a></li>
+                        <li><a href="404.html">Доставка и оплата</a></li>
+                        <li><a href="404.html">Обмен и возврат</a></li>
+                        <li><a href="404.html">Гарантия лучшей цены</a></li>
+                        <li><a href="404.html">Подарочные карты</a></li>
+                        <li><a href="404.html">Trade-in</a></li>
+                        <li><a href="404.html">Рассрочка и кредит</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4 class="footer-title">Каталог</h4>
+                    <ul class="footer-links">
+                        <li><a href="catalpg.html">Mac</a></li>
+                        <li><a href="catalog.html">iPhone</a></li>
+                        <li><a href="catalog.html">Watch</a></li>
+                        <li><a href="catalog.html">iPad</a></li>
+                        <li><a href="catalog.html">Аксессуары</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4 class="footer-title">Контакты</h4>
+                    <div class="footer-contact">
+                        <p class="contact-address">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Россия, Город Дзержинского, 1/2<br>
+                            Перервинский бульвар, 32
+                        </p>
+                        <p class="contact-phone">
+                            <i class="fas fa-phone"></i>
+                            <a href="tel:8800999999">8 800 999 99 99</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="footer-bottom-content">
+                <p class="copyright">© 2026 Импульс</p>
+                <p class="footer-disclaimer">
+                    Информация на сайте не является публичной офертой. Цены, характеристики и внешнийний вид товаров могут отличаться от представленных на сайте. 
+                    Для получения подробной информации обращайтесь к менеджерам.
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+<script>
+  
+        let userAuthState = { logged_in: false, user: null };
+        let allProducts = [];
+
+   
+        async function checkUserAuth() {
+            try {
+                const response = await fetch('/api/auth.php?action=check');
+                const text = await response.text();
+                
+                if (text.trim().startsWith('<')) {
+                    console.error('Auth API вернул HTML вместо JSON!');
+                    return;
+                }
+                
+                const result = JSON.parse(text);
+                userAuthState = { logged_in: result.logged_in, user: result.user };
+                
+                if (result.logged_in) {
+                    document.getElementById('loginLink').style.display = 'none';
+                    document.getElementById('userLink').style.display = 'flex';
+                    document.getElementById('favoritesLink').style.display = 'flex';
+                    document.getElementById('userName').textContent = result.user.username;
+                    document.getElementById('userLink').href = 'cabinet.html';
+                    document.getElementById('favoritesLink').href = 'cabinet.html';
+                    loadCartCount();
+                    loadFavCount();
+                }
+            } catch (error) {
+                console.error('Auth error:', error);
+            }
+        }
+
+      
+        async function loadProducts(categoryFilter = '') {
+            const grid = document.getElementById('productsGrid');
+            if (!grid) { console.error(' productsGrid не найден!'); return; }
+            
+            grid.innerHTML = '<div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i><p>Загрузка товаров...</p></div>';
+            
+            try {
+                console.log('🔄 Запрос к /api/products.php...');
+                const response = await fetch('/api/products.php');
+                console.log('📡 Статус:', response.status);
+                
+                const text = await response.text();
+                if (text.trim().startsWith('<') || text.trim().startsWith('<?')) {
+                    throw new Error('Сервер вернул HTML вместо JSON');
+                }
+                if (!text.trim()) throw new Error('Пустой ответ от сервера');
+                
+                
+                const data = JSON.parse(text);
+                let products;
+                
+                if (Array.isArray(data)) {
+                    products = data;
+                } else if (data && Array.isArray(data.products)) {
+                    products = data.products;
+                    console.log('✅ Извлечено из data.products:', products.length);
+                } else if (data && data.error) {
+                    throw new Error('Ошибка API: ' + data.error);
+                } else {
+                    console.error(' Неизвестный формат ответа:', data);
+                    throw new Error('Некорректный формат ответа от сервера');
+                }
+                
+            
+                if (categoryFilter && categoryFilter !== 'all') {
+                    products = products.filter(p => {
+                        const cat = (p.category || '').toLowerCase();
+                        return cat === categoryFilter.toLowerCase() || cat.includes(categoryFilter.toLowerCase());
+                    });
+                    console.log('🔍 Отфильтровано по категории "' + categoryFilter + '":', products.length);
+                }
+                
+                if (products.length === 0) {
+                    grid.innerHTML = '<div class="empty-state"><i class="fas fa-box-open"></i><p>Товары не найдены</p></div>';
+                    return;
+                }
+                
+             
+                    products = products.slice(0, 5);
+                    console.log('📦 Показываем товаров (из ' + products.length + '):', Math.min(5, products.length));
+
+                    if (products.length === 0) {
+                        grid.innerHTML = '<div class="empty-state"><i class="fas fa-box-open"></i><p>Товары не найдены</p></div>';
+                        return;
+                    }
+                
+ 
+                grid.innerHTML = products.map(product => {
+                    const price = typeof product.price === 'number' ? product.price : 0;
+                    const oldPrice = product.old_price;
+                    const name = product.name || 'Товар';
+                    const image = product.image || '';
+                    const rating = typeof product.rating === 'number' ? product.rating : 5;
+                    const reviews = typeof product.reviews === 'number' ? product.reviews : 0;
+                    const badge = product.badge;
+                    const badgeText = product.badge_text;
+                    const id = product.id;
+                    
+                    return `
+                        <div class="product-card" data-id="${id}" onclick="goToProduct(${id}, event)" style="cursor:pointer;">
+                            ${badge ? `<div class="product-badge ${badge === 'Хит' ? '' : badge}">${badgeText || badge}</div>` : ''}
+                            <button class="product-favorite" onclick="toggleFavorite(${id}); event.stopPropagation();">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <div class="product-image">
+                                <img src="${image}" alt="${name}" loading="lazy" onerror="this.style.opacity='0.5'">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-price">
+                                    <span class="price-current">${formatPrice(price)} ₽</span>
+                                    ${oldPrice ? `<span class="price-old">${formatPrice(oldPrice)} ₽</span>` : ''}
+                                </div>
+                                <h3 class="product-name" title="${name}">${name}</h3>
+                                <div class="product-rating">
+                                    ${generateStars(rating)}
+                                    <span class="rating-count">(${reviews})</span>
+                                </div>
+                                <button class="product-cart-btn" onclick="addToCart(${id}); event.stopPropagation();">
+                                    <i class="fas fa-shopping-cart"></i> В корзину
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                
+                console.log(' Товары загружены:', products.length);
+                
+            } catch (error) {
+                console.error(' Ошибка loadProducts:', error.message);
+                grid.innerHTML = `
+                    <div class="error-state">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p>Не удалось загрузить товары</p>
+                        <p style="font-size:0.875rem;color:#86868b">${error.message}</p>
+                        <button class="btn-primary" onclick="loadProducts()">Попробовать снова</button>
+                    </div>`;
+            }
+        }
+
+        function filterByCategory(category) {
+            console.log(' Фильтр по категории:', category);
+            loadProducts(category);
+        }
+
+        function goToProduct(productId, event) {
+            if (event && event.target.closest('button, a, .product-favorite, .product-cart-btn')) {
+                return;
+            }
+            window.location.href = `product.html?id=${productId}`;
+        }
+
+        async function addToCart(productId) {
+            if (!isLoggedIn()) {
+                if (confirm('Для добавления в корзину необходимо войти. Перейти на страницу входа?')) {
+                    window.location.href = 'login.html';
+                }
+                return;
+            }
+            const fd = new FormData();
+            fd.append('product_id', productId);
+            fd.append('quantity', 1);
+            try {
+                const r = await fetch('/api/cart.php?action=add', { method:'POST', body:fd });
+                const text = await r.text();
+                if (text.trim().startsWith('<')) throw new Error('HTML ответ');
+                const res = JSON.parse(text);
+                if (res.success) { loadCartCount(); showNotification(' В корзине!', 'success'); }
+                else showNotification(' ' + (res.error||'Ошибка'), 'error');
+            } catch(e) { showNotification(' Ошибка: ' + e.message, 'error'); }
+        }
+
+        async function toggleFavorite(productId) {
+            if (!isLoggedIn()) {
+                if (confirm('Для добавления в избранное необходимо войти. Перейти на страницу входа?')) {
+                    window.location.href = 'login.html';
+                }
+                return;
+            }
+            try {
+                const r = await fetch(`/api/favorites.php?action=check&product_id=${productId}`);
+                const text = await r.text();
+                if (text.trim().startsWith('<')) throw new Error('HTML ответ');
+                const check = JSON.parse(text);
+                
+                if (check.in_favorites) {
+                    await fetch(`/api/favorites.php?action=remove&product_id=${productId}`);
+                    showNotification('Удалено из избранного', 'success');
+                } else {
+                    const fd = new FormData();
+                    fd.append('product_id', productId);
+                    await fetch('/api/favorites.php?action=add', { method:'POST', body:fd });
+                    showNotification('Добавлено в избранное', 'success');
+                }
+                loadFavCount();
+            } catch(e) { showNotification(' ' + e.message, 'error'); }
+        }
+
+        async function loadCartCount() {
+            if (!isLoggedIn()) {
+                const b = document.getElementById('cartBadge');
+                if (b) { b.textContent = '0'; b.style.display = 'none'; }
+                return;
+            }
+            try {
+                const r = await fetch('/api/cart.php?action=get');
+                const text = await r.text();
+                if (text.trim().startsWith('<')) return;
+                const res = JSON.parse(text);
+                const b = document.getElementById('cartBadge');
+                if (b && res.items) {
+                    b.textContent = res.count;
+                    b.style.display = res.count > 0 ? 'block' : 'none';
+                }
+            } catch(e) { console.error('Cart count error:', e); }
+        }
+
+        async function loadFavCount() {
+            if (!isLoggedIn()) {
+                const b = document.getElementById('favBadge');
+                if (b) { b.textContent = '0'; b.style.display = 'none'; }
+                return;
+            }
+            try {
+                const r = await fetch('/api/favorites.php?action=get');
+                const text = await r.text();
+                if (text.trim().startsWith('<')) return;
+                const res = JSON.parse(text);
+                const b = document.getElementById('favBadge');
+                if (b && res.items) {
+                    b.textContent = res.count;
+                    b.style.display = res.count > 0 ? 'block' : 'none';
+                }
+            } catch(e) { console.error('Fav count error:', e); }
+        }
+
+
+        function formatPrice(p) { return p.toLocaleString('ru-RU') + ' ₽'; }
+
+        function generateStars(rating) {
+            let s = '';
+            for (let i = 1; i <= 5; i++) {
+                if (i <= rating) s += '<i class="fas fa-star"></i>';
+                else if (i - 0.5 <= rating) s += '<i class="fas fa-star-half-alt"></i>';
+                else s += '<i class="far fa-star"></i>';
+            }
+            return s;
+        }
+
+        function isLoggedIn() { return userAuthState.logged_in; }
+
+        function showNotification(msg, type = 'success') {
+            const n = document.createElement('div');
+            n.textContent = msg;
+            n.style.cssText = `position:fixed;top:100px;right:20px;padding:1rem 2rem;border-radius:0.5rem;color:white;font-weight:600;z-index:10000;${type==='success'?'background:#28a745':'background:#dc3545'}`;
+            document.body.appendChild(n);
+            setTimeout(() => n.remove(), 3000);
+        }
+
+
+        const catalogBtn = document.getElementById('catalogBtn');
+        const catalogDropdown = document.getElementById('catalogDropdown');
+        if (catalogBtn && catalogDropdown) {
+            catalogBtn.addEventListener('click', e => { e.stopPropagation(); catalogDropdown.classList.toggle('active'); });
+            document.addEventListener('click', e => {
+                if (!catalogDropdown.contains(e.target) && !catalogBtn.contains(e.target))
+                    catalogDropdown.classList.remove('active');
+            });
+        }
+
+
+        function setupSearch() {
+            const input = document.getElementById('searchInput');
+            const btn = document.getElementById('searchBtn');
+            
+            const doSearch = () => {
+                const query = input.value.trim();
+                if (query) {
+                    window.location.href = `catalog.html?search=${encodeURIComponent(query)}`;
+                }
+            };
+            
+            btn?.addEventListener('click', doSearch);
+            input?.addEventListener('keypress', (e) => { if (e.key === 'Enter') doSearch(); });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Инициализация...');
+            checkUserAuth();
+            loadProducts();
+            setupSearch();
+        });
+    </script>
+</body>
+</html>
